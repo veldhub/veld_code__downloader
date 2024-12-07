@@ -14,7 +14,7 @@ x-veld:
       description: "The url where some recourse is located and should be downloaded from."
 
 services:
-  downloader:
+  veld_downloader:
     build: .
     command: /veld/code/downloader.sh
     volumes: 
