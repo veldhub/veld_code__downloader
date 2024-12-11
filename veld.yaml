@@ -19,3 +19,4 @@ services:
     command: /veld/code/downloader.sh
     volumes: 
       - ./downloader.sh:/veld/code/downloader.sh
+
