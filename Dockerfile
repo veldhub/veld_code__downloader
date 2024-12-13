@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
-RUN apt update
-RUN apt install -y curl
+FROM alpine:latest
+RUN apk update
+RUN apk add curl
 
