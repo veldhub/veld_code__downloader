@@ -2,6 +2,8 @@
 
 set -e
 
+cd /veld/output/
+
 if [[ "$url" = "" ]]; then
   echo "no 'url' arg given"
   exit 1
@@ -12,7 +14,7 @@ function download {
     echo "file ${1} already exists. Skipping download"
   else
     echo "downloading from ${url} to ${1}"
-    curl -o "$1" "$url"
+    curl -L -o "$1" "$url"
   fi
 }
 
@@ -22,15 +24,23 @@ if [ -z "$out_file" ]; then
   if [ -z "$out_file" ]; then
     echo "could not fetch name from resource; downloading it without knowing the name in advance." 
     cd /tmp
-    curl -O "$url"
+    curl -L -O "$url"
     out_file=$(ls)
     echo "downloaded ${out_file}"
     mv /tmp/"$out_file" /veld/output/"$out_file"
+    cd /veld/output/
   else
     echo "file name is ${out_file}"
-    download /veld/output/"$out_file"
+    download "$out_file"
   fi
 else
-  download /veld/output/"$out_file"
+  download "$out_file"
+fi
+
+if [[ "$do_extract" == "true" ]]; then
+  echo "extracting:"
+  command="dtrx --noninteractive --overwrite ${out_file}"
+  echo "$command"
+  eval "$command"
 fi
 

@@ -26,5 +26,6 @@ services:
     environment:
       url: null
       out_file: null
+      do_extract: false
 
 
