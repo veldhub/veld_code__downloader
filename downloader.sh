@@ -7,18 +7,30 @@ if [[ "$url" = "" ]]; then
   exit 1
 fi
 
-if [[ "$out_file" = "" ]]; then
+function download {
+  if [ -f "$1" ]; then
+    echo "file ${1} already exists. Skipping download"
+  else
+    echo "downloading from ${url} to ${1}"
+    curl -o "$1" "$url"
+  fi
+}
+
+if [ -z "$out_file" ]; then
   echo "no 'out_file' arg given, fetching file name from url"
   out_file=$(curl -sI "$url" | grep -i "content-disposition" | sed -n 's/.*filename="\(.*\)".*/\1/p')
-  echo "file name is ${out_file}"
-fi
-
-out_path=/veld/output/"$out_file"
-
-if [ -f "$out_path" ]; then
-  echo "file ${out_file} already exists. Skipping download"
+  if [ -z "$out_file" ]; then
+    echo "could not fetch name from resource; downloading it without knowing the name in advance." 
+    cd /tmp
+    curl -O "$url"
+    out_file=$(ls)
+    echo "downloaded ${out_file}"
+    mv /tmp/"$out_file" /veld/output/"$out_file"
+  else
+    echo "file name is ${out_file}"
+    download /veld/output/"$out_file"
+  fi
 else
-  echo "downloading from ${url} to ${out_path}"
-  curl -o "$out_path" "$url"
+  download /veld/output/"$out_file"
 fi
 
