@@ -22,6 +22,7 @@ services:
     command: sh /veld/code/downloader.sh
     volumes: 
       - ./downloader.sh:/veld/code/downloader.sh
+      - ./data/output/:/veld/output/
     environment:
       url: null
       out_file: null
