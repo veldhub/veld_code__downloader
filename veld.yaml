@@ -24,8 +24,9 @@ services:
       - ./downloader.sh:/veld/code/downloader.sh
       - ./data/output/:/veld/output/
     environment:
+      in_csv_file: null
       url: null
       out_file: null
       do_extract: false
-
+      csv_has_headers: true
 
