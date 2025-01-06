@@ -10,7 +10,6 @@ echo "out_file: ${out_file}"
 echo "do_extract: ${do_extract}"
 echo "csv_has_headers: ${csv_has_headers}"
 
-
 # validate args
 if [ -z "$url" ] && [ -z "$in_csv_file" ]; then
   echo "no 'url' or 'in_csv_file' arg given"
