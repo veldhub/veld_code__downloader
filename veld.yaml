@@ -1,7 +1,7 @@
 x-veld:
   code:
     description: "A download helper, for simple or batch downloads. Also offers automatic 
-      compression extraction."
+      compressed file extraction."
     topic: ETL
 
     input:
