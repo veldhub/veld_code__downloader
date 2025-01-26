@@ -4,11 +4,19 @@ set -e
 
 # print args
 echo "-- arguments ------------------------------------------------------------"
-echo "in_csv_file: ${in_csv_file}"
-echo "url: ${url}"
-echo "out_file: ${out_file}"
+if [ -n "$in_csv_file" ]; then
+  echo "in_csv_file: ${in_csv_file}"
+fi
+if [ -n "$url" ]; then
+  echo "url: ${url}"
+fi
+if [ -n "$out_file" ]; then
+  echo "out_file: ${out_file}"
+fi
 echo "do_extract: ${do_extract}"
-echo "csv_has_headers: ${csv_has_headers}"
+if [ -n "$in_csv_file" ]; then
+  echo "csv_has_headers: ${csv_has_headers}"
+fi
 
 # validate args
 if [ -z "$url" ] && [ -z "$in_csv_file" ]; then
