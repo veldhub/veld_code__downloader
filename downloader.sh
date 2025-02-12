@@ -80,7 +80,7 @@ function download {
   # handling extraction
   if [[ "$do_extract" == "true" ]]; then
     echo "extracting:"
-    command="dtrx --noninteractive --overwrite ${out_file}"
+    command="dtrx --noninteractive ${out_file}"
     echo "$command"
     eval "$command"
   fi
