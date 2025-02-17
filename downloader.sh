@@ -47,7 +47,7 @@ function download {
       echo "file ${out_file} already exists. Skipping download"
     else
       echo "downloading:"
-      command="curl -L -o ${out_file} ${url}"
+      command="curl -L -o \"${out_file}\" ${url}"
       echo "$command"
       eval "$command"
     fi
