@@ -2,6 +2,10 @@
 
 set -e
 
+function lower {
+  echo $(echo "$1" | tr 'A-Z' 'a-z')
+}
+
 # print args
 echo "-- arguments ------------------------------------------------------------"
 if [ -n "$in_csv_file" ]; then
@@ -13,7 +17,12 @@ fi
 if [ -n "$out_file" ]; then
   echo "out_file: ${out_file}"
 fi
-echo "do_extract: ${do_extract}"
+if [ -n "$do_extract" ]; then
+  # lowering this boolean variable is necessary with podman-compose as that converts yaml boolean
+  # ("true") to "True" as bash variable.
+  do_extract=$(lower $do_extract)
+  echo "do_extract: ${do_extract}"
+fi
 if [ -n "$in_csv_file" ]; then
   echo "csv_has_headers: ${csv_has_headers}"
 fi
